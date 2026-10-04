@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxjey2gd47y1a"
-path="res://.godot/imported/2DPCT_Dash.png-53e31b6fe6167e39759a47c89d477d99.ctex"
+uid="uid://daounq75bjc7v"
+path="res://.godot/imported/2DPCT_CrouchSneak_NO.png-ef030aed241439121247fb30412765ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_Dash.png"
-dest_files=["res://.godot/imported/2DPCT_Dash.png-53e31b6fe6167e39759a47c89d477d99.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_CrouchSneak_NO.png"
+dest_files=["res://.godot/imported/2DPCT_CrouchSneak_NO.png-ef030aed241439121247fb30412765ab.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cur546nycepk2"
-path="res://.godot/imported/2DPCT_CrouchTurn.png-21e049eeb07812d7a0d3d7c2e985d3da.ctex"
+uid="uid://qvpfo4d6ek7g"
+path="res://.godot/imported/2DPCT_Jog_NO.png-b73dac11580a9618ac70539a853f2a28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_CrouchTurn.png"
-dest_files=["res://.godot/imported/2DPCT_CrouchTurn.png-21e049eeb07812d7a0d3d7c2e985d3da.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_Jog_NO.png"
+dest_files=["res://.godot/imported/2DPCT_Jog_NO.png-b73dac11580a9618ac70539a853f2a28.ctex"]
 
 [params]
 

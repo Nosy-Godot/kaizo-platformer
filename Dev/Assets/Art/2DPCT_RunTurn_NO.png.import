@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx0tvouuvgwsv"
-path="res://.godot/imported/2DPCT_RunTurn.png-688a9ee105a7002742a346a944505ba9.ctex"
+uid="uid://c3464cdfefp2j"
+path="res://.godot/imported/2DPCT_RunTurn_NO.png-f0581301f3f170bb4e30cea646068222.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_RunTurn.png"
-dest_files=["res://.godot/imported/2DPCT_RunTurn.png-688a9ee105a7002742a346a944505ba9.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_RunTurn_NO.png"
+dest_files=["res://.godot/imported/2DPCT_RunTurn_NO.png-f0581301f3f170bb4e30cea646068222.ctex"]
 
 [params]
 

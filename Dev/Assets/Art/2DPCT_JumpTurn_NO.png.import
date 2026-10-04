@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvdal00pu18e1"
-path="res://.godot/imported/2DPCT_Run.png-b1b2d06d891a8ee5f420027b881da6e4.ctex"
+uid="uid://ckswqps6jjdy1"
+path="res://.godot/imported/2DPCT_JumpTurn_NO.png-645a12d87f45b36c5253e3d5aacd4987.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_Run.png"
-dest_files=["res://.godot/imported/2DPCT_Run.png-b1b2d06d891a8ee5f420027b881da6e4.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_JumpTurn_NO.png"
+dest_files=["res://.godot/imported/2DPCT_JumpTurn_NO.png-645a12d87f45b36c5253e3d5aacd4987.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxdc1g88dwksj"
-path="res://.godot/imported/2DPCT_Walk.png-57478aa98ec062ad9a76772d7ce7d21e.ctex"
+uid="uid://catopyqxefv3n"
+path="res://.godot/imported/2DPCT_Idle_NO.png-440e6cf2131363fc759b0d4bc73cd00f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_Walk.png"
-dest_files=["res://.godot/imported/2DPCT_Walk.png-57478aa98ec062ad9a76772d7ce7d21e.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_Idle_NO.png"
+dest_files=["res://.godot/imported/2DPCT_Idle_NO.png-440e6cf2131363fc759b0d4bc73cd00f.ctex"]
 
 [params]
 

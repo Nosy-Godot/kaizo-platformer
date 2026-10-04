@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgwxedm0gbdkb"
-path="res://.godot/imported/2DPCT_CrouchSneak.png-d3371558fe5ff234eb2a8ed5e9af9c10.ctex"
+uid="uid://4d4f5ko502h0"
+path="res://.godot/imported/2DPCT_Run_NO.png-3adf441a3f86dd7aebe02526cb36c986.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dev/Assets/Art/2DPCT_CrouchSneak.png"
-dest_files=["res://.godot/imported/2DPCT_CrouchSneak.png-d3371558fe5ff234eb2a8ed5e9af9c10.ctex"]
+source_file="res://Dev/Assets/Art/2DPCT_Run_NO.png"
+dest_files=["res://.godot/imported/2DPCT_Run_NO.png-3adf441a3f86dd7aebe02526cb36c986.ctex"]
 
 [params]
 
