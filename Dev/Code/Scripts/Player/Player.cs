@@ -11,7 +11,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Process(double delta)
 	{
-		GD.Print(IsOnFloor());
 	}
 
 	public override void _PhysicsProcess(double delta)
