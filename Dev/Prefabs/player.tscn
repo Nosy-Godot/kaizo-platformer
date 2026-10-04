@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://miq0gcgal0b6" path="res://Dev/Assets/Art/2DPCT_Walk_NO.png" id="2_lb7qm"]
 [ext_resource type="Texture2D" uid="uid://4d4f5ko502h0" path="res://Dev/Assets/Art/2DPCT_Run_NO.png" id="2_rehik"]
 [ext_resource type="Texture2D" uid="uid://qvpfo4d6ek7g" path="res://Dev/Assets/Art/2DPCT_Jog_NO.png" id="3_ihnhu"]
+[ext_resource type="Texture2D" uid="uid://rtifpox1v5t5" path="res://Dev/Assets/Art/2DPCT_Jump_NO.png" id="4_3y2ml"]
 [ext_resource type="Script" uid="uid://3jgjw7c33ooe" path="res://Dev/Code/Scripts/Player/PlayerPresentation.cs" id="4_4h210"]
 [ext_resource type="AnimationNodeBlendSpace1D" uid="uid://b68aigsinqgf4" path="res://Dev/Prefabs/new_animation_node_blend_space_1d.tres" id="6_if6ee"]
 
@@ -91,6 +92,170 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 1]
+}
+
+[sub_resource type="Animation" id="Animation_fgfq6"]
+resource_name = "Jump_Down"
+length = 0.08334166915044189
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("4_3y2ml")]
+}
+
+[sub_resource type="Animation" id="Animation_kw4ld"]
+resource_name = "Jump_OnGround"
+length = 0.16667500496730212
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("4_3y2ml")]
+}
+
+[sub_resource type="Animation" id="Animation_1mvub"]
+resource_name = "Jump_Stable"
+length = 0.08334166915044189
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("4_3y2ml")]
+}
+
+[sub_resource type="Animation" id="Animation_ihnhu"]
+resource_name = "Jump_Up"
+length = 0.16667500496730212
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336),
+"transitions": PackedFloat32Array(0, 0),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("4_3y2ml")]
 }
 
 [sub_resource type="Animation" id="Animation_lb7qm"]
@@ -220,21 +385,66 @@ tracks/2/keys = {
 _data = {
 &"Idle": SubResource("Animation_e5gco"),
 &"Jog": SubResource("Animation_3y2ml"),
+&"Jump_Down": SubResource("Animation_fgfq6"),
+&"Jump_OnGround": SubResource("Animation_kw4ld"),
+&"Jump_Stable": SubResource("Animation_1mvub"),
+&"Jump_Up": SubResource("Animation_ihnhu"),
 &"RESET": SubResource("Animation_lb7qm"),
 &"Run": SubResource("Animation_4h210"),
 &"Walk": SubResource("Animation_rehik")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1mvub"]
+animation = &"Jump_Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fgfq6"]
+animation = &"Jump_Stable"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kw4ld"]
+animation = &"Jump_Down"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3y2ml"]
+value_label = "YSpeed"
+blend_mode = 1
+blend_point_0/node = SubResource("AnimationNodeAnimation_1mvub")
+blend_point_0/pos = -1.0
+blend_point_0/name = &"Jump_Up"
+blend_point_1/node = SubResource("AnimationNodeAnimation_fgfq6")
+blend_point_1/pos = 0.0
+blend_point_1/name = &"Jump_Stable"
+blend_point_2/node = SubResource("AnimationNodeAnimation_kw4ld")
+blend_point_2/pos = 1.0
+blend_point_2/name = &"Jump_Down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3y2ml"]
+animation = &"Jump_OnGround"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihnhu"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1mvub"]
+advance_mode = 2
+advance_expression = "!is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgfq6"]
+advance_mode = 2
+advance_expression = "is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3y2ml"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3tmb8"]
-states/End/position = Vector2(898, 100)
+states/End/position = Vector2(650, 124)
+states/JumpBlend/node = SubResource("AnimationNodeBlendSpace1D_3y2ml")
+states/JumpBlend/position = Vector2(304, 5)
+states/Jump_OnGround/node = SubResource("AnimationNodeAnimation_3y2ml")
+states/Jump_OnGround/position = Vector2(524, -20)
 states/MoveBlend/node = ExtResource("6_if6ee")
-states/MoveBlend/position = Vector2(367, 263)
+states/MoveBlend/position = Vector2(304, 124)
 states/Start/position = Vector2(149, 124)
-transitions = ["Start", "MoveBlend", SubResource("AnimationNodeStateMachineTransition_ihnhu")]
-graph_offset = Vector2(-267, -29)
+transitions = ["Start", "MoveBlend", SubResource("AnimationNodeStateMachineTransition_ihnhu"), "MoveBlend", "JumpBlend", SubResource("AnimationNodeStateMachineTransition_1mvub"), "JumpBlend", "Jump_OnGround", SubResource("AnimationNodeStateMachineTransition_fgfq6"), "Jump_OnGround", "MoveBlend", SubResource("AnimationNodeStateMachineTransition_3y2ml")]
+graph_offset = Vector2(-374, -152)
 
 [node name="Player" type="CharacterBody2D" unique_id=1777034891]
 physics_interpolation_mode = 1
@@ -259,5 +469,7 @@ _player = NodePath("..")
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer" unique_id=1922572243]
 root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_3tmb8")
+advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("..")
+parameters/JumpBlend/blend_position = 0.6822785
 parameters/MoveBlend/blend_position = 0.9522978

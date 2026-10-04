@@ -7,7 +7,12 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 100.0f;
 	public const float JumpVelocity = -400.0f;
 
-	private const float _sprintBoost = 1.5f; 
+	private const float _sprintBoost = 1.5f;
+
+    public override void _Process(double delta)
+	{
+		GD.Print(IsOnFloor());
+	}
 
 	public override void _PhysicsProcess(double delta)
     {
