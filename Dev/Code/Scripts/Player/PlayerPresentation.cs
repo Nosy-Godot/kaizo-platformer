@@ -21,6 +21,7 @@ public partial class PlayerPresentation : AnimationPlayer
 			_sprite.FlipH = pVel.X < 0;
 		}
 
-		_animTree.Set("parameters/MoveBlend/blend_position", Mathf.Abs(pVel.X));
+		var blendValue = Mathf.Abs(pVel.X) / _player.SprintSpeed;
+		_animTree.Set("parameters/MoveBlend/blend_position", blendValue);
 	}
 }
