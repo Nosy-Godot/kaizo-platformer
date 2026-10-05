@@ -5,7 +5,7 @@ using System;
 public partial class Player : CharacterBody2D, IStateContext
 {
 	public float Speed = 150.0f;
-	public const float JumpVelocity = -400.0f;
+	public float JumpVelocity = -400.0f;
 
     [Export] public float Acceleration = 400;
     [Export] public float Decceleration = 250;
