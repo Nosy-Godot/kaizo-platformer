@@ -7,6 +7,10 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 100.0f;
 	public const float JumpVelocity = -400.0f;
 
+    [Export] public float Acceleration = 200;
+    [Export] public float Decceleration = 150;
+    [Export] public float OpositeInputMultiplier = 1.5f;
+
 	private const float _sprintBoost = 1.5f;
 
     public override void _Process(double delta)
@@ -15,17 +19,18 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
     {
-        var velocity = CalculateMovementVelocity(delta, Velocity);
+        var fDelta = (float)delta;
+        var velocity = CalculateMovementVelocity(fDelta, Velocity);
         Velocity = velocity;
         MoveAndSlide();
     }
 
-    private Vector2 CalculateMovementVelocity(double delta, Vector2 velocity)
+    private Vector2 CalculateMovementVelocity(float delta, Vector2 velocity)
     {
 		// gravity
         if (!IsOnFloor())
         {
-            velocity += GetGravity() * (float)delta;
+            velocity += GetGravity() * delta;
         }
 
 		// jump
@@ -40,11 +45,16 @@ public partial class Player : CharacterBody2D
 
         if (direction != Vector2.Zero)
         {
-            velocity.X = direction.X * (isSprinting ? SprintSpeed : Speed);
+            var target = direction.X * (isSprinting ? SprintSpeed : Speed);
+            if (Mathf.Sign(direction.X) != Mathf.Sign(velocity.X))
+            {
+                Acceleration *= OpositeInputMultiplier;
+            }
+            velocity.X = Mathf.MoveToward(Velocity.X, target, Acceleration * delta);
         }
         else
         {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, Decceleration * delta);
         }
 
         return velocity;
