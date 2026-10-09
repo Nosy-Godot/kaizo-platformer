@@ -16,16 +16,23 @@ public partial class Player : CharacterBody2D, IStateContext
     private FiniteStateMachine _stateMachine;
     private PlayerGroundedState _groundedState;
     private PlayerAirState _airState;
+    private PlayerDashingState _dashState;
 
 
     public override void _Ready()
     {
         _groundedState = new PlayerGroundedState(this);
         _airState = new PlayerAirState(this);
+        _dashState = new PlayerDashingState(this);
         _stateMachine = new FiniteStateMachine(_groundedState);
 
-        _stateMachine.AddAnyTransition(_airState, new FuncPredicate(() => IsOnFloor() == false));
         _stateMachine.AddTransition(_airState, _groundedState, new FuncPredicate(() => IsOnFloor()));
+        _stateMachine.AddTransition(_groundedState, _airState, new FuncPredicate(() => IsOnFloor() == false));
+
+        _stateMachine.AddTransition(_groundedState, _dashState, new FuncPredicate(() => Input.IsActionJustPressed("Sprint")));
+        _stateMachine.AddTransition(_airState, _dashState, new FuncPredicate(() => Input.IsActionJustPressed("Sprint")));
+        _stateMachine.AddTransition(_dashState, _groundedState, new FuncPredicate(() => _dashState.DashEnded && IsOnFloor()));
+        _stateMachine.AddTransition(_dashState, _airState, new FuncPredicate(() => _dashState.DashEnded && IsOnFloor() == false));
     }
 
     public override void _Process(double delta)
