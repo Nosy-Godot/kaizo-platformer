@@ -7,9 +7,9 @@ public partial class Player : CharacterBody2D, IStateContext
 	public float Speed = 150.0f;
 	public float JumpVelocity = -400.0f;
 
-    [Export] public float Acceleration = 400;
-    [Export] public float Decceleration = 250;
-    [Export] public float AirAcceleration = 600;
+    [Export] public float Acceleration = 600;
+    [Export] public float Decceleration = 500;
+    [Export] public float AirAcceleration = 800;
     [Export] public float AirDecceleration = 500;
     [Export] public float OpositeInputMultiplier = 1.75f;
 
