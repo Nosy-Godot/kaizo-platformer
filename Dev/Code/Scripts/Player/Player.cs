@@ -5,13 +5,16 @@ using System;
 public partial class Player : CharacterBody2D, IStateContext
 {
 	public float Speed = 150.0f;
-	public float JumpVelocity = -400.0f;
+	public float JumpVelocity = -350.0f;
 
     [Export] public float Acceleration = 600;
     [Export] public float Decceleration = 500;
     [Export] public float AirAcceleration = 800;
     [Export] public float AirDecceleration = 500;
     [Export] public float OpositeInputMultiplier = 1.75f;
+
+    public float FallLongMult = 0.85f;
+    public float FallShortMult = 1.85f;
 
     private FiniteStateMachine _stateMachine;
     private PlayerGroundedState _groundedState;
@@ -90,7 +93,9 @@ public partial class Player : CharacterBody2D, IStateContext
         // gravity
         if (!IsOnFloor())
         {
-            currentVelocity += GetGravity() * delta;
+            var gravity = GetGravity();
+            var multiplier = Input.IsActionPressed("ui_accept") ? FallLongMult : FallShortMult;
+            currentVelocity += gravity * multiplier * delta;
         }
 
         return currentVelocity;
