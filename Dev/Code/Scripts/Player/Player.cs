@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D, IStateContext
     [Export] public float Decceleration = 500;
     [Export] public float AirAcceleration = 800;
     [Export] public float AirDecceleration = 500;
-    [Export] public float OpositeInputMultiplier = 2;
+    [Export] public float OpositeInputMultiplier = 5;
 
     public float FallLongMult = 0.85f;
     public float FallShortMult = 1.85f;
@@ -61,7 +61,7 @@ public partial class Player : CharacterBody2D, IStateContext
         return MoveAndSlide();
     }
 
-    public Vector2 ProcessInputMovement(float delta, Vector2 currentVelocity, float acc, float decc)
+    public void ProcessInputMovement(float delta, ref Vector2 currentVelocity, float acc, float decc)
     {
         var moveX = PlayerInput.MoveXAxis;
 
@@ -78,22 +78,21 @@ public partial class Player : CharacterBody2D, IStateContext
         {
             currentVelocity.X = Mathf.MoveToward(Velocity.X, 0, decc * delta);
         }
-
-        return currentVelocity;
     }
 
-    public Vector2 TryJump(Vector2 currentVelocity)
+    public bool TryJump(ref Vector2 currentVelocity)
     {
         // jump
         if (PlayerInput.WasJumpPressed && IsOnFloor())
         {
             currentVelocity.Y = JumpVelocity;
+            return true;
         }
 
-        return currentVelocity;
+        return false;
     }
 
-    public Vector2 ProcessGravity(float delta, Vector2 currentVelocity)
+    public void ProcessGravity(float delta, ref Vector2 currentVelocity)
     {
         // gravity
         if (!IsOnFloor())
@@ -102,8 +101,6 @@ public partial class Player : CharacterBody2D, IStateContext
             var multiplier = PlayerInput.JumpPressed ? FallLongMult : FallShortMult;
             currentVelocity += gravity * multiplier * delta;
         }
-
-        return currentVelocity;
     }
 
     public bool IsWallSliding()
