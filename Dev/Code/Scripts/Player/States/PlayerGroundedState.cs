@@ -7,13 +7,16 @@ public class PlayerGroundedState : BaseState<Player>
     {
     }
 
+    public override void OnEnter(IState previousState)
+    {
+        _context.DynamicVel.Y = 0;
+    }
+
     public override void OnFixedUpdate(float fixedDelta)
     {
-        var vel = _context.Velocity;
-        _context.ProcessGravity(fixedDelta, ref vel);
-        _context.TryJump(ref vel);
-        _context.ProcessInputMovement(fixedDelta, ref vel, _context.Acceleration, _context.Decceleration);
-
-        _context.TryMoveAndSlide(vel);
+        _context.ProcessGravity(fixedDelta);
+        _context.TryJump();
+        _context.ProcessInputMovement(fixedDelta, _context.Acceleration, _context.Decceleration);
+        _context.DoMoveAndSlide();
     }
 }

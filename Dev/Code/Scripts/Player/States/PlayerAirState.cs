@@ -11,17 +11,20 @@ public class PlayerAirState : BaseState<Player>
 
     public override void OnFixedUpdate(float fixedDelta)
     {
-        var vel = _context.Velocity;
-
-        var wallSliding = ProcessWallSlide(fixedDelta, ref vel);
+        var wallSliding = ProcessWallSlide(fixedDelta, ref _context.DynamicVel);
 
         if (wallSliding == false)
         {
-            _context.ProcessGravity(fixedDelta, ref vel);
+            _context.ProcessGravity(fixedDelta);
+            _context.ProcessInputMovement(fixedDelta, _context.AirAcceleration, _context.AirDecceleration);
+        }
+        else if (PlayerInput.WasJumpPressed)
+        {
+            var normal = _context.GetWallNormal();
+            _context.DynamicVel += normal * _context.WallJumpHorizontalVelocity + Vector2.Up * _context.WallJumpVerticalVelocity;
         }
 
-        _context.ProcessInputMovement(fixedDelta, ref vel, _context.AirAcceleration, _context.AirDecceleration);
-        _context.TryMoveAndSlide(vel);
+        _context.DoMoveAndSlide();
 
         
         _wasWallSliding = wallSliding;

@@ -20,12 +20,14 @@ public class PlayerDashingState : BaseState<Player>
         _dashDir = direction;
 
         _dashEndTime = Time.GetTicksMsec() + 100;
+
+        var dir = _dashDir;
+        _context.DynamicVel = dir * _context.Speed * 3;
+        _context.KinematicVel = Vector2.Zero;
     }
 
     public override void OnFixedUpdate(float fixedDelta)
     {
-        var dir = _dashDir;
-        _context.Velocity = dir * _context.Speed * 3;
-        _context.MoveAndSlide();
+        _context.DoMoveAndSlide();
     }
 }
