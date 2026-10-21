@@ -16,6 +16,12 @@ public partial class Player : CharacterBody2D, IStateContext
     public float FallLongMult = 0.85f;
     public float FallShortMult = 1.85f;
 
+    [Export] public float MaxWallSlideSpeed = 80f;
+    [Export] public float WallJumpHorizontalVelocity = 180f;
+    [Export] public float WallJumpVerticalVelocity = -300f;
+
+
+
     private FiniteStateMachine _stateMachine;
     private PlayerGroundedState _groundedState;
     private PlayerAirState _airState;
@@ -99,5 +105,14 @@ public partial class Player : CharacterBody2D, IStateContext
         }
 
         return currentVelocity;
+    }
+
+    public bool IsWallSliding()
+    {
+        var xInput = Input.GetAxis("ui_left", "ui_right");
+        var wallNormal = GetWallNormal();
+        var dot = wallNormal.Dot(Vector2.Right * xInput);
+
+        return IsOnWall() && dot < 0 && Velocity.Y > 0;
     }
 }
