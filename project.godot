@@ -20,8 +20,8 @@ BetterTerrain="*uid://dlx6qa7flme1g"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
