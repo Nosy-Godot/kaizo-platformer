@@ -20,8 +20,6 @@ public partial class Player : CharacterBody2D, IStateContext
     [Export] public float WallJumpHorizontalVelocity = 180f;
     [Export] public float WallJumpVerticalVelocity = -300f;
 
-
-
     private FiniteStateMachine _stateMachine;
     private PlayerGroundedState _groundedState;
     private PlayerAirState _airState;
@@ -38,7 +36,7 @@ public partial class Player : CharacterBody2D, IStateContext
         _stateMachine.AddTransition(_airState, _groundedState, new FuncPredicate(() => IsOnFloor()));
         _stateMachine.AddTransition(_groundedState, _airState, new FuncPredicate(() => IsOnFloor() == false));
 
-        var dashPressedPred = new InputPressedPredicate("Dash");
+        var dashPressedPred = new FuncPredicate(() => PlayerInput.DashPressed);
         _stateMachine.AddTransition(_groundedState, _dashState, dashPressedPred);
         _stateMachine.AddTransition(_airState, _dashState, dashPressedPred);
         _stateMachine.AddTransition(_dashState, _groundedState, new FuncPredicate(() => _dashState.DashEnded && IsOnFloor()));
@@ -65,12 +63,12 @@ public partial class Player : CharacterBody2D, IStateContext
 
     public Vector2 ProcessInputMovement(float delta, Vector2 currentVelocity, float acc, float decc)
     {
-        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        var moveX = PlayerInput.MoveXAxis;
 
-        if (direction != Vector2.Zero)
+        if (moveX != 0)
         {
-            var target = direction.X * Speed;
-            if (Mathf.Sign(direction.X) != Mathf.Sign(currentVelocity.X))
+            var target = moveX * Speed;
+            if (Mathf.Sign(moveX) != Mathf.Sign(currentVelocity.X))
             {
                 acc *= OpositeInputMultiplier;
             }
@@ -87,7 +85,7 @@ public partial class Player : CharacterBody2D, IStateContext
     public Vector2 TryJump(Vector2 currentVelocity)
     {
         // jump
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+        if (PlayerInput.WasJumpPressed && IsOnFloor())
         {
             currentVelocity.Y = JumpVelocity;
         }
@@ -101,7 +99,7 @@ public partial class Player : CharacterBody2D, IStateContext
         if (!IsOnFloor())
         {
             var gravity = GetGravity();
-            var multiplier = Input.IsActionPressed("ui_accept") ? FallLongMult : FallShortMult;
+            var multiplier = PlayerInput.JumpPressed ? FallLongMult : FallShortMult;
             currentVelocity += gravity * multiplier * delta;
         }
 
@@ -110,7 +108,7 @@ public partial class Player : CharacterBody2D, IStateContext
 
     public bool IsWallSliding()
     {
-        var xInput = Input.GetAxis("ui_left", "ui_right");
+        var xInput = PlayerInput.MoveXAxis;
         var wallNormal = GetWallNormal();
         var dot = wallNormal.Dot(Vector2.Right * xInput);
 
