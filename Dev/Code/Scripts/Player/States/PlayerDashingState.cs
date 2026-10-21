@@ -16,7 +16,7 @@ public class PlayerDashingState : BaseState<Player>
     {
         _enterVel = _context.Velocity;
 
-        var direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        var direction = PlayerInput.MoveAxis;
         _dashDir = direction;
 
         _dashEndTime = Time.GetTicksMsec() + 100;

@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D, IStateContext
     [Export] public float Decceleration = 500;
     [Export] public float AirAcceleration = 800;
     [Export] public float AirDecceleration = 500;
-    [Export] public float OpositeInputMultiplier = 1.75f;
+    [Export] public float OpositeInputMultiplier = 2;
 
     public float FallLongMult = 0.85f;
     public float FallShortMult = 1.85f;
