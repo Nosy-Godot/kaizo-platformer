@@ -38,8 +38,9 @@ public partial class Player : CharacterBody2D, IStateContext
         _stateMachine.AddTransition(_airState, _groundedState, new FuncPredicate(() => IsOnFloor()));
         _stateMachine.AddTransition(_groundedState, _airState, new FuncPredicate(() => IsOnFloor() == false));
 
-        _stateMachine.AddTransition(_groundedState, _dashState, new FuncPredicate(() => Input.IsActionJustPressed("Sprint")));
-        _stateMachine.AddTransition(_airState, _dashState, new FuncPredicate(() => Input.IsActionJustPressed("Sprint")));
+        var dashPressedPred = new InputPressedPredicate("Dash");
+        _stateMachine.AddTransition(_groundedState, _dashState, dashPressedPred);
+        _stateMachine.AddTransition(_airState, _dashState, dashPressedPred);
         _stateMachine.AddTransition(_dashState, _groundedState, new FuncPredicate(() => _dashState.DashEnded && IsOnFloor()));
         _stateMachine.AddTransition(_dashState, _airState, new FuncPredicate(() => _dashState.DashEnded && IsOnFloor() == false));
     }

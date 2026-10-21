@@ -80,4 +80,3 @@ public class PlayerDashingState : BaseState<Player>
         _context.MoveAndSlide();
     }
 }
-
