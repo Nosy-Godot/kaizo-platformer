@@ -9,9 +9,8 @@
 [ext_resource type="Script" uid="uid://3jgjw7c33ooe" path="res://Dev/Code/Scripts/Player/PlayerPresentation.cs" id="4_4h210"]
 [ext_resource type="AnimationNodeBlendSpace1D" uid="uid://b68aigsinqgf4" path="res://Dev/Prefabs/new_animation_node_blend_space_1d.tres" id="6_if6ee"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj2ic"]
-radius = 6.0
-height = 22.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj2ic"]
+size = Vector2(12, 22)
 
 [sub_resource type="Animation" id="Animation_e5gco"]
 resource_name = "Idle"
@@ -485,10 +484,12 @@ graph_offset = Vector2(-374, -152)
 [node name="Player" type="CharacterBody2D" unique_id=1777034891]
 physics_interpolation_mode = 1
 script = ExtResource("1_31k4p")
+floor_snap_length = 4.0
+safe_margin = 0.01
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=574749229]
 position = Vector2(0, -11)
-shape = SubResource("CapsuleShape2D_cj2ic")
+shape = SubResource("RectangleShape2D_cj2ic")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738415654]
 scale = Vector2(2, 2)

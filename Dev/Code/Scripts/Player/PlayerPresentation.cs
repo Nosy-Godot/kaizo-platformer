@@ -16,12 +16,9 @@ public partial class PlayerPresentation : AnimationPlayer
 	public override void _Process(double delta)
 	{
 		var pVel = _player.Velocity;
-		if (pVel.X != 0)
-		{
-			_sprite.FlipH = pVel.X < 0;
-		}
+		_sprite.FlipH = _player.Facing < 0;
 
-		var moveBlendValue = Mathf.Abs(pVel.X) / _player.Speed;
+		var moveBlendValue = Mathf.Abs(pVel.X) / _player.MaxRunSpeed;
 		_animTree.Set("parameters/MoveBlend/blend_position", moveBlendValue);
 
 		var jumpBlendValue = Mathf.Sign(pVel.Y);

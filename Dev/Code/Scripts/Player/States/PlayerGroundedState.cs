@@ -1,4 +1,3 @@
-using System;
 using NosyCore.FSM;
 
 public class PlayerGroundedState : BaseState<Player>
@@ -7,16 +6,12 @@ public class PlayerGroundedState : BaseState<Player>
     {
     }
 
-    public override void OnEnter(IState previousState)
-    {
-        _context.DynamicVel.Y = 0;
-    }
-
     public override void OnFixedUpdate(float fixedDelta)
     {
-        _context.ProcessGravity(fixedDelta);
+        // Gravity keeps the body pressed into the floor so IsOnFloor stays stable.
+        _context.ProcessGravity(fixedDelta, _context.MaxFall);
         _context.TryJump();
-        _context.ProcessInputMovement(fixedDelta, _context.Acceleration, _context.Decceleration);
+        _context.ProcessRun(fixedDelta, 1f);
         _context.DoMoveAndSlide();
     }
 }

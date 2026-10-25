@@ -42,11 +42,13 @@ A separate class library (`Microsoft.NET.Sdk`, no Godot reference: keep it engin
 
 ### Player (`Player/`)
 
-- `Player : CharacterBody2D` builds the three states and registers all transitions in `_Ready()`: grounded↔air (via `IsOnFloor()`), grounded/air→dash (`PlayerInput.DashPressed`), dash→grounded/air (`DashEnded` + floor check).
-- States are one class per file in `Player/States/` and hold only per-state logic; shared movement helpers (`ProcessGravity`, `ProcessInputMovement`, `TryJump`, `DoMoveAndSlide`, `IsWallSliding`) live on `Player`.
-- **Two-velocity model**: `KinematicVel` (input-driven horizontal movement) and `DynamicVel` (gravity, jump, wall jump, dash impulse). `DoMoveAndSlide()` sets `Velocity = KinematicVel + DynamicVel`, applies horizontal drag to `DynamicVel.X`, then calls `MoveAndSlide()`. States mutate these fields (sometimes `ref _context.DynamicVel`) rather than `Velocity` directly.
-- Per-state `OnFixedUpdate` order: grounded = gravity → jump → input movement → move; air = wall-slide check (else gravity + air input movement; wall-jump impulse when sliding and jump pressed) → move; dash = move only (velocity set once in `OnEnter`: `MoveAxis * Speed * 3` into `DynamicVel`, `KinematicVel` zeroed, ends after `DashDurationTicks` physics ticks).
+- `Player : CharacterBody2D` builds the four states (grounded, air, wall slide, dash) and registers all transitions in `_Ready()` (order = priority; dash is checked first from every non-dash state).
+- States are one class per file in `Player/States/` and hold only per-state logic; shared movement helpers (`ProcessRun`, `ProcessGravity`, `ProcessVarJump`, `TryJump`, `TryWallJump`, `TrySuperJump`, `CornerCorrect`, `WallAt`/`WallDir`, `DoMoveAndSlide`) live on `Player`. Tuning values are `[Export]`s grouped by `[ExportGroup]`, roughly Celeste's constants ×2 (16 px tiles).
+- **Single velocity**: states mutate `Player.Vel`; `DoMoveAndSlide()` applies upward corner correction, copies `Vel` into `Velocity`, calls `MoveAndSlide()` and copies the slid velocity back (so collisions zero blocked components).
+- **Timers are physics ticks** (coyote, jump/dash buffers, var jump, wall-jump forced input, dash cooldown/refill), decremented in `TickTimers()` before the FSM tick. Coyote and dash refill are refreshed there while `IsOnFloor()`.
+- Wall detection uses `TestMove` probes (`WallAt`), not `IsOnWall()`. Wall jump works within `WallJumpCheckDist` px of a wall and locks horizontal input away from it for `WallJumpForceTicks`.
+- Dash: `DashFreezeTicks` of no movement, then the 8-way `PlayerInput.DashAim` (fallback `Facing`) is read and `Vel = dir * DashSpeed` for `DashTicks`. A buffered jump while grounded/coyote turns it into a super (horizontal) or hyper (down-diagonal) jump; otherwise `OnExit` sets `EndDashSpeed`.
 - `PlayerInput` (`Utility/`) is a static wrapper over `Godot.Input` actions; use it instead of calling `Input` in states.
-- `PlayerPresentation : AnimationPlayer` is presentation only (`_Process`): flips the sprite and drives `AnimationTree` blend positions from `Player.Velocity`. Physics logic goes in `_PhysicsProcess`/states, animation in `_Process`.
+- `PlayerPresentation : AnimationPlayer` is presentation only (`_Process`): flips the sprite by `Player.Facing` and drives `AnimationTree` blend positions from `Player.Velocity`. Physics logic goes in `_PhysicsProcess`/states, animation in `_Process`.
 
 `Player.DebugStates` (export) logs state changes through `StateChanged`; `Player.CurrentState` exposes the FSM state for tests.
