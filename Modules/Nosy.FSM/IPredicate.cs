@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace NosyCore.FSM
 {
@@ -6,15 +6,16 @@ namespace NosyCore.FSM
     {
         bool Evaluate();
     }
-    
-    public class FuncPredicate : IPredicate{
+
+    public class FuncPredicate : IPredicate
+    {
         private readonly Func<bool> _func;
-        
+
         public FuncPredicate(Func<bool> func)
         {
-            _func = func ?? throw new NotImplementedException();
+            _func = func ?? throw new ArgumentNullException(nameof(func));
         }
-        
+
         public bool Evaluate()
         {
             return _func.Invoke();

@@ -2,11 +2,17 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kaizo-project", "kaizo-project.csproj", "{9055E660-9BAB-40A6-84FF-C50C6F2F2773}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{4ED66FE2-E531-4FDA-B496-DF663727860B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nosy.FSM", "Modules\Nosy.FSM\Nosy.FSM.csproj", "{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nosy.FSM.Tests", "Modules\Nosy.FSM.Tests\Nosy.FSM.Tests.csproj", "{15CDA8FC-6659-4E64-855E-8BCE8929930D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	ExportDebug|Any CPU = ExportDebug|Any CPU
-	ExportRelease|Any CPU = ExportRelease|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9055E660-9BAB-40A6-84FF-C50C6F2F2773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -15,5 +21,21 @@ Global
 		{9055E660-9BAB-40A6-84FF-C50C6F2F2773}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{9055E660-9BAB-40A6-84FF-C50C6F2F2773}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{9055E660-9BAB-40A6-84FF-C50C6F2F2773}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AC9500F-E045-4D92-BFEE-B98DA2CDA1D5} = {4ED66FE2-E531-4FDA-B496-DF663727860B}
+		{15CDA8FC-6659-4E64-855E-8BCE8929930D} = {4ED66FE2-E531-4FDA-B496-DF663727860B}
 	EndGlobalSection
 EndGlobal
