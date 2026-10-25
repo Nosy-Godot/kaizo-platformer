@@ -235,6 +235,7 @@ separation = Vector2i(1, 1)
 5:5/0 = 0
 6:5/0 = 0
 6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:5/0/custom_data_0 = true
 7:5/0 = 0
 7:5/0/metadata/_better_terrain = {
 8: [1],

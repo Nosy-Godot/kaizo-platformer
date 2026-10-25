@@ -34,6 +34,7 @@ public partial class Player : CharacterBody2D
     [Export] public int DashFreezeTicks = 3;
     [Export] public int DashCooldownTicks = 12;
     [Export] public int DashRefillCooldownTicks = 6;
+    [Export] public int AirDashRefillTicks = 180;
     [Export] public int MaxDashes = 1;
     [Export] public float SuperJumpHSpeed = 520f;
     [Export] public float HyperJumpHSpeed = 650f;
@@ -72,6 +73,7 @@ public partial class Player : CharacterBody2D
     private int _forceMoveTicks;
     private int _dashCooldown;
     private int _dashRefillCooldown;
+    private int _airDashRefill;
     private float _maxFall;
 
     public IState CurrentState => _stateMachine.CurrentState;
@@ -137,6 +139,7 @@ public partial class Player : CharacterBody2D
         Tick(ref _forceMoveTicks);
         Tick(ref _dashCooldown);
         Tick(ref _dashRefillCooldown);
+        Tick(ref _airDashRefill);
 
         if (PlayerInput.WasJumpPressed) _jumpBuffer = JumpBufferTicks;
         if (PlayerInput.DashPressed) _dashBuffer = DashBufferTicks;
@@ -145,6 +148,10 @@ public partial class Player : CharacterBody2D
         {
             _coyote = CoyoteTicks;
             if (_dashRefillCooldown == 0) Dashes = MaxDashes;
+        }
+        else if (AirDashRefillTicks > 0 && _airDashRefill == 0)
+        {
+            Dashes = MaxDashes;
         }
     }
 
@@ -257,6 +264,7 @@ public partial class Player : CharacterBody2D
         _dashBuffer = 0;
         _dashCooldown = DashCooldownTicks;
         _dashRefillCooldown = DashRefillCooldownTicks;
+        _airDashRefill = AirDashRefillTicks;
         _varJump = 0;
     }
 

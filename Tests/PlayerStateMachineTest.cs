@@ -102,6 +102,28 @@ public class PlayerStateMachineTest
     }
 
     [TestCase]
+    public async Task AirDash_RefillsAfterAirRefillTicksWithoutLanding()
+    {
+        Load(FlatScene);
+        await Land();
+
+        _player.AirDashRefillTicks = 30;
+        _player.GlobalPosition = new Godot.Vector2(0, -3000);
+        await ISceneRunner.SyncPhysicsFrame;
+        await Tap("Dash");
+        await AwaitPhysicsFramesUntil(() => _player.Dashes == 0);
+
+        for (var i = 0; i < 25; i++)
+        {
+            await ISceneRunner.SyncPhysicsFrame;
+            AssertThat(_player.Dashes).IsEqual(0);
+        }
+
+        await AwaitPhysicsFramesUntil(() => _player.Dashes == _player.MaxDashes, 10);
+        AssertThat(_player.IsOnFloor()).IsFalse();
+    }
+
+    [TestCase]
     public async Task Falling_IsCappedAtMaxFall()
     {
         Load(FlatScene);

@@ -2,7 +2,13 @@ using Godot;
 
 public class CameraShake
 {
-    private readonly FastNoiseLite _noise = new() { NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex };
+    // FastNoiseLite defaults (frequency 0.01, FBM) flatten the output to ~0.1; ShakeFrequency sets the speed instead.
+    private readonly FastNoiseLite _noise = new()
+    {
+        NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex,
+        Frequency = 1f,
+        FractalType = FastNoiseLite.FractalTypeEnum.None,
+    };
     private float _time;
 
     public float Trauma { get; private set; }
