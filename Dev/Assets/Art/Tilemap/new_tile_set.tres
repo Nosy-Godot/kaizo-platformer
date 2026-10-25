@@ -259,6 +259,8 @@ separation = Vector2i(1, 1)
 
 [resource]
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "slippery"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_cj2ic")
 metadata/_better_terrain = {
 &"decoration": ["Decoration", Color(0.4117647, 0.4117647, 0.4117647, 1), 3, [], {

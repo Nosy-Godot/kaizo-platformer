@@ -10,12 +10,12 @@ public partial class Player : CharacterBody2D
     [Export] public float AirAccelMult = 0.65f;
 
     [ExportGroup("Jump")]
-    [Export] public float JumpSpeed = 210f;
+    [Export] public float JumpSpeed = 300f;
     [Export] public float JumpHBoost = 80f;
-    [Export] public int VarJumpTicks = 12;
-    [Export] public float Gravity = 1500f;
+    [Export] public int VarJumpTicks = 11;
+    [Export] public float Gravity = 1800f;
     [Export] public float HalfGravThreshold = 100f;
-    [Export] public float MaxFall = 280f;
+    [Export] public float MaxFall = 320f;
     [Export] public float FastMaxFall = 440f;
     [Export] public float FastMaxAccel = 600f;
 
@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
     [Export] public int WallJumpCheckDist = 5;
     [Export] public float WallJumpHSpeed = 260f;
     [Export] public int WallJumpForceTicks = 10;
+    [Export] public float WallJumpTowardSpeedMult = 0.7f;
 
     [ExportGroup("Dash")]
     [Export] public float DashSpeed = 480f;
@@ -46,6 +47,8 @@ public partial class Player : CharacterBody2D
 
     [ExportGroup("Debug")]
     [Export] public bool DebugStates;
+
+    public const string SlipperyData = "slippery";
 
     private FiniteStateMachine _stateMachine;
     private PlayerGroundedState _groundedState;
@@ -173,8 +176,10 @@ public partial class Player : CharacterBody2D
         var moveX = _forceMoveTicks > 0 ? _forceMoveX : PlayerInput.MoveX;
         if (moveX != 0) Facing = moveX;
 
-        var target = moveX * MaxRunSpeed;
-        var overspeed = Mathf.Abs(Vel.X) > MaxRunSpeed && Mathf.Sign(Vel.X) == moveX;
+        // Holding back toward the wall during the wall-jump lock trims the push, so a single wall climbs faster.
+        var trimming = _forceMoveTicks > 0 && PlayerInput.MoveX == -_forceMoveX;
+        var target = moveX * MaxRunSpeed * (trimming ? WallJumpTowardSpeedMult : 1f);
+        var overspeed = !trimming && Mathf.Abs(Vel.X) > MaxRunSpeed && Mathf.Sign(Vel.X) == moveX;
         var accel = overspeed ? RunReduce : RunAccel;
         Vel.X = Mathf.MoveToward(Vel.X, target, accel * mult * delta);
     }
@@ -267,7 +272,17 @@ public partial class Player : CharacterBody2D
         return 0;
     }
 
-    public bool WallAt(int dir, int dist) => Blocked(GlobalTransform, Vector2.Right * dir * dist);
+    public bool WallAt(int dir, int dist) => Blocked(GlobalTransform, Vector2.Right * dir * dist) && !IsSlippery(_probe);
+
+    private static bool IsSlippery(KinematicCollision2D hit)
+    {
+        if (hit.GetCollider() is not TileMapLayer layer) return false;
+
+        // Physics quadrants merge tile bodies, so GetCoordsForBodyRid can't name the cell; step from the contact into the tile instead.
+        var coords = layer.LocalToMap(layer.ToLocal(hit.GetPosition() - hit.GetNormal()));
+        var data = layer.GetCellTileData(coords);
+        return data != null && data.HasCustomData(SlipperyData) && data.GetCustomData(SlipperyData).AsBool();
+    }
 
     public bool CornerCorrect(Vector2 motion, Vector2 axis, int maxOffset, int sign)
     {
