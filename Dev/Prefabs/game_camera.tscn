@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Dev/Code/Scripts/Camera/GameCamera.cs" id="1_cam"]
+
+[node name="GameCamera" type="Camera2D"]
+process_callback = 0
+zoom = Vector2(2, 2)
+script = ExtResource("1_cam")

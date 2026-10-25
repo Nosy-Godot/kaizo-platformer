@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://bs3oyv13ts4nm" path="res://Dev/Prefabs/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Dev/Prefabs/game_camera.tscn" id="2_cam"]
+[ext_resource type="Script" path="res://Dev/Code/Scripts/Camera/CameraRoom.cs" id="3_room"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(4000, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_small"]
+size = Vector2(480, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wide"]
+size = Vector2(1280, 360)
+
+[node name="CameraTest" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="SmallRoom" type="Area2D" parent="."]
+script = ExtResource("3_room")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallRoom"]
+position = Vector2(0, -50)
+shape = SubResource("RectangleShape2D_small")
+
+[node name="WideRoom" type="Area2D" parent="."]
+script = ExtResource("3_room")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WideRoom"]
+position = Vector2(880, -80)
+shape = SubResource("RectangleShape2D_wide")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(0, 40)
+
+[node name="GameCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("2_cam")]
+Target = NodePath("../Player")

@@ -52,3 +52,11 @@ A separate class library (`Microsoft.NET.Sdk`, no Godot reference: keep it engin
 - `PlayerPresentation : AnimationPlayer` is presentation only (`_Process`): flips the sprite by `Player.Facing` and drives `AnimationTree` blend positions from `Player.Velocity`. Physics logic goes in `_PhysicsProcess`/states, animation in `_Process`.
 
 `Player.DebugStates` (export) logs state changes through `StateChanged`; `Player.CurrentState` exposes the FSM state for tests.
+
+### Camera (`Camera/`)
+
+- `GameCamera : Camera2D` (prefab `Dev/Prefabs/game_camera.tscn`, zoom 2 = 640×360 world px) lives in the level, not in the player, and reads `Target` (the `Player`) by polling only. It ticks in `_PhysicsProcess` with `ProcessPhysicsPriority = 100` so it runs after the player in the same frame.
+- Per tick: target = focus + smoothed look-ahead (by `Facing` × speed) and `_anchorY` + look-down (fast fall) → `CameraZone` override → clamp to room → exponential damping (`Damp`) → hard margins (the player never gets within `MarginX/Y` of the screen edge) → clamp to room again → shake on `Offset`.
+- `_anchorY` follows the player only on the floor or in wall slide; in the air it moves only past `AirDeadZoneUp/Down`, so normal jumps don't move the camera vertically.
+- `CameraRoom`/`CameraZone` extend `CameraArea : Area2D`; bounds come from a child `CollisionShape2D` with a `RectangleShape2D` (monitoring is turned off). A room smaller than the view on an axis centers the camera on that axis. Entering another room tweens the camera over `TransitionDuration` with `Player.Frozen = true` (`_PhysicsProcess` returns before `TickTimers`). Use `SnapToTarget()` after teleports/respawns.
+- Physics interpolation and `snap_2d_transforms_to_pixel` are on: the camera is not rounded by hand. Move/teleport nodes in physics ticks and call `ResetPhysicsInterpolation()` after teleports.

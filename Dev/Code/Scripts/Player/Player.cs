@@ -56,6 +56,7 @@ public partial class Player : CharacterBody2D
     private readonly KinematicCollision2D _probe = new();
 
     public Vector2 Vel;
+    public bool Frozen;
     public int Facing { get; private set; } = 1;
     public int Dashes { get; private set; }
 
@@ -118,6 +119,8 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Frozen) return;
+
         TickTimers();
         _stateMachine.FixedUpdate((float)delta);
     }
